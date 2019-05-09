@@ -5,17 +5,26 @@
  */
 package cacacliente;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author manie
  */
 public class CACACliente {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Chat_ventana objeto = null;
+        try {
+            objeto = new Chat_ventana();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CACACliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        objeto.setVisible(true);
+        Login_ventana objeto2=new Login_ventana();
+        objeto2.setVisible(true);
     }
     
 }
