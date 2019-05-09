@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -49,12 +50,13 @@ public class GruposForm_Ventana extends JFrame{
         Font LucidNom = new Font("Lucida Sans Typewriter", 1, 15);
         tNombre = new JTextField();
         tUsuarios = new JPanel();
+        tUsuarios.setLayout(new BoxLayout(tUsuarios, BoxLayout.Y_AXIS));
         
         crear = new JButton("Log-in");
         crear.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent a){  
-                
+                    putUser(tUsuarios);
                 }             
             }
         );
@@ -93,7 +95,7 @@ public class GruposForm_Ventana extends JFrame{
                                 .addComponent(tNombre)
                                 .addComponent(pUsers)
                                 .addComponent(aniadir)
-                                .addComponent(tUsuarios)                         
+                                .addComponent(tUsuarios, 100, 100, 100)                         
                             )
                     )
                     .addGroup(lay.createSequentialGroup()
@@ -123,7 +125,7 @@ public class GruposForm_Ventana extends JFrame{
                                 .addComponent(tNombre)
                                 .addComponent(pUsers)
                                 .addComponent(aniadir)
-                                .addComponent(tUsuarios)                         
+                                .addComponent(tUsuarios, 100, 100, 100)                         
                             )
                     )
                     .addGroup(lay.createParallelGroup()
@@ -142,6 +144,13 @@ public class GruposForm_Ventana extends JFrame{
         );
         
         this.setLayout(lay);
+        this.pack();
+    }
+    
+    private void putUser(JPanel panel){
+        JTextField user;
+        user = new JTextField();
+        panel.add(user);
         this.pack();
     }
 }
