@@ -1,4 +1,4 @@
-package caca;
+package cacacliente;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
