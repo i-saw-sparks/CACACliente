@@ -45,6 +45,7 @@ public class GruposForm_Ventana extends JFrame{
     }
     
     private void addGroup(String name){
+        System.out.println("aqui");
         JsonObject envio = new JsonObject();
         envio.addProperty("type", "newGroup");
         
@@ -63,6 +64,7 @@ public class GruposForm_Ventana extends JFrame{
             byte[] data = packet.getBytes();
             socket.getOutputStream().write(data);
         } catch (IOException ex) {
+            System.out.println(ex);
             java.util.logging.Logger.getLogger(GruposForm_Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -85,15 +87,8 @@ public class GruposForm_Ventana extends JFrame{
 
         
         
+ 
         
-        crear = new JButton("Log-in");
-        crear.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent a){  
-                    addGroup(tNombre.getText());
-                }             
-            }
-        );
         
         lName = new JLabel("Clientes Adoran Chatear Aqui");
         lName.setFont(LucidCal);
@@ -105,6 +100,13 @@ public class GruposForm_Ventana extends JFrame{
         lSpace = new JLabel(" ");
         lLine.setForeground(Color.white);
         aniadir = new JButton("+");
+        aniadir.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent a){  
+                    addGroup(tNombre.getText());
+                }             
+            }
+        );
         lName.setForeground(Color.white);
         lUser.setForeground(Color.white);
         lWelcome.setForeground(Color.white);
