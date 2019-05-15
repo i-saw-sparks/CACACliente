@@ -243,8 +243,8 @@ public class Chat_ventana extends JFrame{
         etiquetas.add(contadorEtiquetas);
         contadorEtiquetas++;
         this.pack();
-        GruposForm_Ventana form = new GruposForm_Ventana(boton);
-        form.setVisible(true);
+        //GruposForm_Ventana form = new GruposForm_Ventana(boton);
+        //form.setVisible(true);
         return boton;
     }
     

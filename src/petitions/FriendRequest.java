@@ -5,6 +5,7 @@
  */
 package petitions;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import controllers.Context;
 import java.io.IOException;
@@ -27,7 +28,16 @@ public class FriendRequest {
             JsonObject args = new JsonObject();
             args.addProperty("user", context.getUsername());
             args.addProperty("request", receiver);
-        } catch (IOException ex) {
+            
+            packet.add("args",args);
+            Gson gson = new Gson();
+            
+            String send = gson.toJson(packet);
+            
+            out.write(send.getBytes());
+            
+        } catch (IOException ex) 
+        {
             Logger.getLogger(FriendRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
