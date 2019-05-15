@@ -5,12 +5,10 @@
  */
 package controllers;
 
-import cacacliente.Chat_ventana;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import requests.Login;
+import requests.Sign;
 
 /**
  *
@@ -34,31 +32,10 @@ public class ProcessRequest {
 
         switch (response.get("type").getAsString()) {
             case "sign":
-                if (response.get("status").getAsBoolean()) {
-                    JOptionPane alert = new JOptionPane();
-                    alert.showMessageDialog(null, "Usuario registrado");
-                } else {
-                        JOptionPane alert = new JOptionPane();
-                        alert.showMessageDialog(null, "El usuario no se ha podido registrar");
-                }
+                Sign sign = new Sign(response.get("status").getAsBoolean());
                 break;
-
             case "login":
-                JsonObject json = response.get("args").getAsJsonObject();
-                if (json.get("status").getAsBoolean()) {
-                    try {
-                        context.getLogVent().setVisible(false);
-                        Chat_ventana vent = new Chat_ventana();
-                        vent.setVisible(true);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(ProcessRequest.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    if (context.counter > 2) {
-                        JOptionPane alert = new JOptionPane();
-                        alert.showMessageDialog(null, "Morro, ya mejor registrate");
-                    }
-                }
+                Login login = new Login(response.get("args").getAsJsonObject(), context);
                 break;
             default:
                 break;

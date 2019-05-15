@@ -21,7 +21,6 @@ import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -38,12 +37,14 @@ public class Login_ventana extends JFrame {
     private int counter = 0;
     private Context context;
     
-    public Login_ventana() {
+    public Login_ventana() 
+    {
         configuracion();
+        System.out.println("Conectando...");
         context = new Context();
         try 
         {
-            socket = new Socket("192.168.43.123", 1000);
+            socket = new Socket("127.0.0.1", 1000);
             
             Thread thread  = new Thread(()->
             {
@@ -78,7 +79,7 @@ public class Login_ventana extends JFrame {
     }
 
     void bLog() {
-        context.counter++;
+        context.setCounter(context.getCounter()+1);
         String user = tUser.getText();
         String password = tPassword.getText();
         

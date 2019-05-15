@@ -14,7 +14,19 @@ import java.util.ArrayList;
  */
 public class Context 
 {
-    public int counter = 0;
+    private int counter = 0;
+    String username;
+    ArrayList<String> connectedUsers;
+    Login_ventana logVent;
+    
+    
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
     
     public Login_ventana getLogVent(){
         return logVent;
@@ -38,10 +50,5 @@ public class Context
 
     public void setConnectedUsers(ArrayList<String> connectedUsers) {
         this.connectedUsers = connectedUsers;
-    }
-    String username;
-    ArrayList<String> connectedUsers;
-    Login_ventana logVent;
-    
-    
+    }    
 }
