@@ -148,7 +148,7 @@ public class ChatFrame extends JFrame
         JButton button = new JButton("Añadir nuevo grupo");
         button.addActionListener(e->
         {
-            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana();
+            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana(context);
             form.setVisible(true);
         });
         groups.add(button);
@@ -156,11 +156,14 @@ public class ChatFrame extends JFrame
       
     private void optionsConnected(String name, JButton button)
     {
-        System.out.println("Nuevo conectado!");
+        ConnectedUsersFrame form=new ConnectedUsersFrame(name);
+        form.setVisible(true);
     }
     
     private void optionsFriends(String name, JButton sender)
     {
+        Amigos_ventana form=new Amigos_ventana(name);
+        form.setVisible(true);
         System.out.println("Hola");
     }
     
