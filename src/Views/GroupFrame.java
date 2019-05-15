@@ -15,17 +15,20 @@ import petitions.FriendRequest;
  *
  * @author usuario
  */
-public class ConnectedUsersFrame extends JFrame{
+public class GroupFrame extends JFrame{
     
     private JButton[] botones;
     GroupLayout orden;
     private String UserName;
     private JLabel NombreUsuario;
+    private String id;
     Context context;
+
     
-    public ConnectedUsersFrame(String name,Context con){
+    public GroupFrame(String id,String name,Context con){
         this.UserName=name;
         this.context=con;
+        this.id=id;
         Configuracion();
     }
     
@@ -38,8 +41,8 @@ public class ConnectedUsersFrame extends JFrame{
         Font fuente1 = new Font("Calibri", 1, 15);
         Font fuente2 = new Font("Calibri", 1, 20);
         
-        botones=new JButton[3]; 
-        for(int i=0;i<3;i++){
+        botones=new JButton[4]; 
+        for(int i=0;i<4;i++){
                 botones[i]=new JButton();
                 botones[i].setFont(fuente1);
         }
@@ -48,11 +51,11 @@ public class ConnectedUsersFrame extends JFrame{
         NombreUsuario.setFont(LucidNom);
         NombreUsuario.setForeground(Color.white);
         
-        botones[0].setText("Agregar Amigo");
+        botones[0].setText("Agregar al grupo");
         botones[0].addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent a){  
-                    AddFriend();
+                    AddToGroup();
                 }             
             }
         );
@@ -64,11 +67,20 @@ public class ConnectedUsersFrame extends JFrame{
                 }             
             }
         );
-        botones[2].setText("Iniciar conversación");
+        botones[2].setText("Borrar grupo");
         botones[2].addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent a){  
-                    StartConversation();
+                    DeleteGroup();
+                }             
+            }
+        );
+        
+        botones[3].setText("Renombrar");
+        botones[3].addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent a){  
+                    RenameGroup();
                 }             
             }
         );
@@ -85,7 +97,8 @@ public class ConnectedUsersFrame extends JFrame{
                         .addComponent(botones[0],15,150,550)
                         .addComponent(botones[1],15,100,550) 
                 )
-                .addComponent(botones[2],15,150,1000)
+                .addComponent(botones[2],15,500,1000)
+                .addComponent(botones[3],15,500,1000)
         );
         orden.setVerticalGroup(
                 orden.createSequentialGroup()
@@ -96,13 +109,14 @@ public class ConnectedUsersFrame extends JFrame{
                             .addComponent(botones[1],10,30,400)
                     )
                     .addComponent(botones[2],10,30,400)
+                    .addComponent(botones[3],10,30,400)
         );
         this.setLayout(orden);
         this.pack();
     }
     
-    public void AddFriend(){
-        new FriendRequest(context, UserName);
+    public void AddToGroup(){
+
         return;
     }
     
@@ -111,8 +125,12 @@ public class ConnectedUsersFrame extends JFrame{
         return;
     }
     
-    public void StartConversation(){
+    public void DeleteGroup(){
 
+        return;
+    }
+    
+    public void RenameGroup(){
         return;
     }
 }

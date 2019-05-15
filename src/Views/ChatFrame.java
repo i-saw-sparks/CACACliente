@@ -32,6 +32,7 @@ public class ChatFrame extends JFrame
     private JPanel disconnected;
     private JPanel notifications;
     private JPanel more;
+    private JButton Refresh;
     
     public ChatFrame(Context source)
     {
@@ -85,9 +86,10 @@ public class ChatFrame extends JFrame
     
     private void optionsNotification(String name, String type)
     {
-        if(type.equals("friend"))
+        if(!type.equals("friend-unnacepted"))
         {
-            new FriendAccept(context,name,true);
+            RequestFrame form=new RequestFrame(name,type,context);
+            form.setVisible(true);
         }
     }
     
@@ -110,10 +112,16 @@ public class ChatFrame extends JFrame
         
         button.addActionListener(e ->
         {
-            return;
+            optionsGroup(id,asunto);
         });
         
         groups.add(button);
+    }
+    
+    private void optionsGroup(String id, String asunto)
+    {
+        GroupFrame form=new GroupFrame(id,asunto,context);
+        form.setVisible(true);
     }
     
     public void addDisconnected(String name)
@@ -130,7 +138,8 @@ public class ChatFrame extends JFrame
     
     private void optionsDisconnected(String name, JButton button)
     {
-        new FriendRequest(context, name);
+        DisconnectedUsersFrame form=new DisconnectedUsersFrame(name,context);
+        form.setVisible(true);
     }
     
     public void addConnected(String name)
@@ -157,7 +166,7 @@ public class ChatFrame extends JFrame
       
     private void optionsConnected(String name, JButton button)
     {
-        ConnectedUsersFrame form=new ConnectedUsersFrame(name);
+        ConnectedUsersFrame form=new ConnectedUsersFrame(name,context);
         form.setVisible(true);
     }
     
@@ -175,6 +184,11 @@ public class ChatFrame extends JFrame
         selector = new JTabbedPane(JTabbedPane.LEFT);
         this.add(selector);
         
+        
+        Refresh= new JButton("Refresh");
+        Refresh.setBounds(500, 500, 500, 500);
+        this.add(Refresh);
+        
         JPanel[] creator = new JPanel[6];
         String[] titles = {"Amigos","Grupos","Conectados",
         "Desconectados", "Notificaciones","Más"};
@@ -187,6 +201,7 @@ public class ChatFrame extends JFrame
             scrolls[i] = new JScrollPane(creator[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
             selector.addTab(titles[i], scrolls[i]);
         }
+        
         
         friends  = creator[0];
         groups = creator[1];
@@ -203,7 +218,9 @@ public class ChatFrame extends JFrame
         order.setHorizontalGroup(order.createSequentialGroup()
         .addComponent(selector,200,500,600));
         
+        
         this.setLayout(order);
+        
         this.pack();
     }   
 }
