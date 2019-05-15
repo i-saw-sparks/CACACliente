@@ -107,6 +107,17 @@ public class ChatFrame extends JFrame
         connected.add(button);
     }
     
+    
+      private void setAddGroupBtt(){
+        JButton button = new JButton("Añadir nuevo grupo");
+        button.addActionListener(e->
+        {
+            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana();
+            form.setVisible(true);
+        });
+        groups.add(button);
+    }
+      
     private void optionsConnected(String name, JButton button)
     {
         System.out.println("Nuevo conectado!");
@@ -142,6 +153,8 @@ public class ChatFrame extends JFrame
         connected = creator[2];
         disconnected = creator[3];
         notifications = creator[4];
+        
+        setAddGroupBtt();
         
         GroupLayout order = new GroupLayout(this.getContentPane());
         order.setVerticalGroup(order.createSequentialGroup()
