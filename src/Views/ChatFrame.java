@@ -120,7 +120,8 @@ public class ChatFrame extends JFrame
       
     private void optionsConnected(String name, JButton button)
     {
-        System.out.println("Nuevo conectado!");
+        ConnectedUsersFrame form=new ConnectedUsersFrame(name);
+        form.setVisible(true);
     }
     
     private void optionsFriends(String name, JButton sender)
