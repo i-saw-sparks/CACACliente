@@ -17,17 +17,40 @@ import javax.swing.JOptionPane;
  */
 public class Login 
 {
+    Context context;
+    ChatFrame chat;
+    
+    public Login(Context context, JsonObject args)
+    {
+        this.chat = context.chat;
+        chat.removeAll();
+        updatePanel(args);
+    }
+    
     public Login(JsonObject args, Context context) 
     {
+        this.context = context;
         JOptionPane alert = new JOptionPane();
         if (args.get("status").getAsBoolean()) 
         {
             context.getLogVent().setVisible(false);
             ChatFrame chat = new ChatFrame(context);
             chat.setVisible(true);
-            
+            this.chat = chat;
             context.chat = chat;
-            
+            updatePanel(args);
+        }
+        else 
+        {
+            alert.showMessageDialog(null, "Credenciales erroneas");
+            if (context.getCounter() > 2) {
+                alert.showMessageDialog(null, "Por favor, haga el registro");
+            }
+        }
+    }
+    
+    public void updatePanel(JsonObject args)
+    {
             JsonArray connected = args.get("connected").getAsJsonArray();
             connected.forEach(u -> 
             {
@@ -41,7 +64,6 @@ public class Login
             {
                 JsonObject user = u.getAsJsonObject();
                 String username = user.get("username").getAsString();
-                System.out.println(username);
                 chat.addDisconnected(username);
             });
             JsonArray notifications = args.get("notifications").getAsJsonArray();
@@ -52,13 +74,19 @@ public class Login
                 String type = element.get("type").getAsString();
                 chat.addNotification(name, type);
             });
-        }
-        else 
-        {
-            alert.showMessageDialog(null, "Credenciales erroneas");
-            if (context.getCounter() > 2) {
-                alert.showMessageDialog(null, "Por favor, haga el registro");
-            }
-        }
+            
+            JsonArray amigos = args.get("friends").getAsJsonArray();
+            amigos.forEach(u -> 
+            {
+                JsonObject element = u.getAsJsonObject();
+                chat.addFriend(element.get("username").getAsString(), element.get("alias").getAsString());
+            });
+            
+            JsonArray grupos = args.get("groups").getAsJsonArray();
+            grupos.forEach( u ->
+            {
+                JsonObject g = u.getAsJsonObject();
+                chat.addGroup(g.get("id").getAsString(),g.get("asunto").getAsString());
+            });
     }
 }

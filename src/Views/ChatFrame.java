@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import petitions.FriendAccept;
 import petitions.FriendRequest;
 
 /**
@@ -36,6 +37,25 @@ public class ChatFrame extends JFrame
         this.context = source;
         configureWindow();
         this.setLayout(null);
+    }
+    
+    public void removeAll()
+    {
+        friends.removeAll();
+        friends.revalidate();
+        friends.repaint();
+        groups.removeAll();
+        groups.revalidate();
+        groups.repaint();
+        connected.removeAll();
+        connected.revalidate();
+        connected.repaint();
+        disconnected.removeAll();
+        disconnected.revalidate();
+        disconnected.repaint();
+        notifications.removeAll();
+        notifications.revalidate();
+        notifications.repaint();
     }
     
     public void addNotification(String name, String type)
@@ -64,12 +84,15 @@ public class ChatFrame extends JFrame
     
     private void optionsNotification(String name, String type)
     {
-        return;
+        if(type.equals("friend"))
+        {
+            new FriendAccept(context,name,true);
+        }
     }
     
-    public void addFriend(String name)
+    public void addFriend(String name, String alias)
     {
-        JButton button = new JButton(name);
+        JButton button = new JButton(alias);
         button.setSize(500, 100);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(e->
@@ -77,6 +100,19 @@ public class ChatFrame extends JFrame
             optionsFriends(name,button);
         });
         friends.add(button);
+    }
+    
+    public void addGroup(String id, String asunto)
+    {
+        JButton button = new JButton(asunto);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        button.addActionListener(e ->
+        {
+            return;
+        });
+        
+        groups.add(button);
     }
     
     public void addDisconnected(String name)
@@ -112,7 +148,7 @@ public class ChatFrame extends JFrame
         JButton button = new JButton("Añadir nuevo grupo");
         button.addActionListener(e->
         {
-            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana();
+            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana(context);
             form.setVisible(true);
         });
         groups.add(button);
@@ -126,6 +162,8 @@ public class ChatFrame extends JFrame
     
     private void optionsFriends(String name, JButton sender)
     {
+        Amigos_ventana form=new Amigos_ventana(name);
+        form.setVisible(true);
         System.out.println("Hola");
     }
     

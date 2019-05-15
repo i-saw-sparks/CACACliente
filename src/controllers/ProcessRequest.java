@@ -31,16 +31,23 @@ public class ProcessRequest {
             return;
         }
 
+        Sign sign;
+        Login login;
         switch (response.get("type").getAsString()) {
             case "sign":
-                Sign sign = new Sign(response.get("status").getAsBoolean());
+                 sign = new Sign(response.get("status").getAsBoolean());
                 break;
             case "login":
-                Login login = new Login(response.get("args").getAsJsonObject(), context);
+                login = new Login(response.get("args").getAsJsonObject(), context);
                 break;
             default:
             case "friend-request":
                 FriendRequestResponse resp = new FriendRequestResponse(response.get("status").getAsBoolean(),context);
+                login = new Login(context,response.get("args").getAsJsonObject());
+                break;
+            case "exit":
+                 sign = new Sign(response.get("status").getAsBoolean());
+                 login = new Login(context,response.get("args").getAsJsonObject());
                 break;
         }
     }
