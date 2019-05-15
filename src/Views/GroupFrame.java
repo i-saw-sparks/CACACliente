@@ -116,7 +116,7 @@ public class GroupFrame extends JFrame{
     }
     
     public void AddToGroup(){
-
+        
         return;
     }
     

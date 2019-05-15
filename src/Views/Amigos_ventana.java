@@ -6,6 +6,7 @@
 package Views;
 
 
+import controllers.Context;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -26,11 +27,12 @@ public class Amigos_ventana extends JFrame {
     private String UserName;
     private GroupLayout lay;
     private Socket socket;
+    Context context;
     
-    public Amigos_ventana(String name) {
+    public Amigos_ventana(String name,Context con) {
         this.UserName=name;
-        configuracion();
-        
+        this.context=con;
+        configuracion();  
     }
        
     
