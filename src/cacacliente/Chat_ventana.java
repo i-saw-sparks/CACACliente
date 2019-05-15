@@ -68,7 +68,7 @@ public class Chat_ventana extends JFrame{
        addGrupo.setFont(fuente);
        addGrupo.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-                Agregar_Etiqueta(panGrupos);           
+                GrupoForm(panGrupos);           
             }
         });
         /*JButton buttonRemoveAll = new JButton("Remove All");     
@@ -80,9 +80,7 @@ public class Chat_ventana extends JFrame{
                             
         mainPanel.add(buttonAdd, BorderLayout.PAGE_START);
         //mainPanel.add(buttonRemoveAll, BorderLayout.PAGE_END);                            
-        slider.addComponent(mainPanel);
-                       
-        
+        slider.addComponent(mainPanel);                       
         
         slider.addComponent(new JButton("Amigos"));
         slider.addComponent(new JButton("Usuarios"));
@@ -234,6 +232,19 @@ public class Chat_ventana extends JFrame{
         etiquetas.add(contadorEtiquetas);
         contadorEtiquetas++;
         this.pack();
+        return boton;
+    }
+    
+    public JButton GrupoForm(JPanel panGrupos){
+        JButton boton=new JButton("Nueva Grupo"); //Va a cambiar
+        boton.setBackground(Color.LIGHT_GRAY);
+        boton.setFont(new Font("Calibri", 1, 20));
+        panGrupos.add(boton);
+        etiquetas.add(contadorEtiquetas);
+        contadorEtiquetas++;
+        this.pack();
+        GruposForm_Ventana form = new GruposForm_Ventana(boton);
+        form.setVisible(true);
         return boton;
     }
     
