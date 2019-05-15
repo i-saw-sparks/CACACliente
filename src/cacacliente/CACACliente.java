@@ -15,14 +15,14 @@ import java.util.logging.Logger;
 public class CACACliente {
 
     public static void main(String[] args) {
-        Chat_ventana objeto = null;
+        /*Chat_ventana objeto = null;
         try {
             objeto = new Chat_ventana();
         } catch (InterruptedException ex) {
             Logger.getLogger(CACACliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
-        objeto.setVisible(true);
+        //objeto.setVisible(true);
         Login_ventana objeto2=new Login_ventana();
         objeto2.setVisible(true);
     }
