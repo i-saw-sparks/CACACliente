@@ -112,7 +112,7 @@ public class ChatFrame extends JFrame
         JButton button = new JButton("Añadir nuevo grupo");
         button.addActionListener(e->
         {
-            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana();
+            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana(context);
             form.setVisible(true);
         });
         groups.add(button);
