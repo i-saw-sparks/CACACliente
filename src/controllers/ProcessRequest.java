@@ -40,7 +40,6 @@ public class ProcessRequest {
             case "login":
                 login = new Login(response.get("args").getAsJsonObject(), context);
                 break;
-            default:
             case "friend-request":
                 FriendRequestResponse resp = new FriendRequestResponse(response.get("status").getAsBoolean(),context);
                 login = new Login(context,response.get("args").getAsJsonObject());
@@ -48,7 +47,12 @@ public class ProcessRequest {
             case "exit":
                  sign = new Sign(response.get("status").getAsBoolean());
                  login = new Login(context,response.get("args").getAsJsonObject());
+                 break;
+            case "newGroup":
+                sign = new Sign(response.get("status").getAsBoolean());
+                login = new Login(context,response.get("args").getAsJsonObject());
                 break;
+            default:
         }
     }
 }

@@ -24,13 +24,14 @@ import petitions.FriendRequest;
 
 public class ChatFrame extends JFrame
 { 
-    Context context;
-    JTabbedPane selector;
-    JPanel friends;
-    JPanel groups;
-    JPanel connected;
-    JPanel disconnected;
-    JPanel notifications;
+    private Context context;
+    private JTabbedPane selector;
+    private JPanel friends;
+    private JPanel groups;
+    private JPanel connected;
+    private JPanel disconnected;
+    private JPanel notifications;
+    private JPanel more;
     
     public ChatFrame(Context source)
     {
@@ -148,10 +149,10 @@ public class ChatFrame extends JFrame
         JButton button = new JButton("Añadir nuevo grupo");
         button.addActionListener(e->
         {
-            cacacliente.GruposForm_Ventana form = new cacacliente.GruposForm_Ventana(context);
+            Views.GruposForm_Ventana form = new Views.GruposForm_Ventana(context);
             form.setVisible(true);
         });
-        groups.add(button);
+        more.add(button);
     }
       
     private void optionsConnected(String name, JButton button)
@@ -171,15 +172,15 @@ public class ChatFrame extends JFrame
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Panel de control CACA");
-        selector = new JTabbedPane();
+        selector = new JTabbedPane(JTabbedPane.LEFT);
         this.add(selector);
         
-        JPanel[] creator = new JPanel[5];
+        JPanel[] creator = new JPanel[6];
         String[] titles = {"Amigos","Grupos","Conectados",
-        "Desconectados", "Notificaciones"};
-        final JScrollPane[] scrolls = new JScrollPane[5]; 
+        "Desconectados", "Notificaciones","Más"};
+        final JScrollPane[] scrolls = new JScrollPane[6]; 
         
-        for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < 6; i++) 
         {
             creator[i] = new JPanel();
             creator[i].setLayout(new BoxLayout(creator[i],BoxLayout.Y_AXIS));
@@ -192,7 +193,7 @@ public class ChatFrame extends JFrame
         connected = creator[2];
         disconnected = creator[3];
         notifications = creator[4];
-        
+        more = creator[5];
         setAddGroupBtt();
         
         GroupLayout order = new GroupLayout(this.getContentPane());
