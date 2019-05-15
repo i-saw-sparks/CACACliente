@@ -59,7 +59,18 @@ public class Chat_ventana extends JFrame{
                 Agregar_Etiqueta(mainPanel);           
             }
         });
-                            
+                
+       
+       JPanel panGrupos = new JPanel();
+       panGrupos.setLayout(new BoxLayout(panGrupos, BoxLayout.Y_AXIS));
+       JButton addGrupo = new JButton("Añadir Grupo");
+       addGrupo.setBackground(Color.LIGHT_GRAY);
+       addGrupo.setFont(fuente);
+       addGrupo.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+                GrupoForm(panGrupos);           
+            }
+        });
         /*JButton buttonRemoveAll = new JButton("Remove All");     
         buttonRemoveAll.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -68,13 +79,15 @@ public class Chat_ventana extends JFrame{
         });*/
                             
         mainPanel.add(buttonAdd, BorderLayout.PAGE_START);
-        //mainPanel.add(buttonRemoveAll, BorderLayout.PAGE_END);
-                            
-        slider.addComponent(mainPanel);
-                            
+        //mainPanel.add(buttonRemoveAll, BorderLayout.PAGE_END);                            
+        slider.addComponent(mainPanel);                       
+        
         slider.addComponent(new JButton("Amigos"));
         slider.addComponent(new JButton("Usuarios"));
-        slider.addComponent(new JButton("Grupos"));
+        
+        panGrupos.add(addGrupo, BorderLayout.PAGE_START);
+        slider.addComponent(panGrupos);
+        //slider.addComponent(new JButton("Grupos"));
                                                    
 
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -219,6 +232,19 @@ public class Chat_ventana extends JFrame{
         etiquetas.add(contadorEtiquetas);
         contadorEtiquetas++;
         this.pack();
+        return boton;
+    }
+    
+    public JButton GrupoForm(JPanel panGrupos){
+        JButton boton=new JButton("Nueva Grupo"); //Va a cambiar
+        boton.setBackground(Color.LIGHT_GRAY);
+        boton.setFont(new Font("Calibri", 1, 20));
+        panGrupos.add(boton);
+        etiquetas.add(contadorEtiquetas);
+        contadorEtiquetas++;
+        this.pack();
+        //GruposForm_Ventana form = new GruposForm_Ventana(boton);
+        //form.setVisible(true);
         return boton;
     }
     
