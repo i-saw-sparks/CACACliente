@@ -35,12 +35,12 @@ public class Amigos_ventana extends JFrame {
        
     
     void bChat() {
-        System.out.println("Abrir chat");
+
         return;
     }
 
     void bAlias() {
-        System.out.println("Set Alias");
+
         return;
 
     }
