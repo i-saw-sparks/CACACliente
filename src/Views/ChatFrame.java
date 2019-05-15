@@ -7,6 +7,7 @@ package Views;
 
 import controllers.Context;
 import java.awt.Component;
+import java.util.Hashtable;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -33,6 +34,12 @@ public class ChatFrame extends JFrame
     private JPanel notifications;
     private JPanel more;
     private JButton Refresh;
+    
+    Hashtable<String, JButton> connectedList = new Hashtable<String, JButton>();
+    Hashtable<String, JButton> disconnectedList = new Hashtable<String, JButton>();
+    Hashtable<String, JButton> groupsList = new Hashtable<String, JButton>();
+    Hashtable<String, JButton> friendsList = new Hashtable<String, JButton>();
+    Hashtable<String, JButton> notificationsList = new Hashtable<String, JButton>();
     
     public ChatFrame(Context source)
     {
@@ -82,6 +89,7 @@ public class ChatFrame extends JFrame
         });
         
         notifications.add(label);
+        notificationsList.put(name,label);
     }
     
     private void optionsNotification(String name, String type)
@@ -103,6 +111,7 @@ public class ChatFrame extends JFrame
             optionsFriends(name,button);
         });
         friends.add(button);
+        friendsList.put(name,button);
     }
     
     public void addGroup(String id, String asunto)
@@ -116,6 +125,7 @@ public class ChatFrame extends JFrame
         });
         
         groups.add(button);
+        groupsList.put(id,button);
     }
     
     private void optionsGroup(String id, String asunto)
@@ -133,7 +143,8 @@ public class ChatFrame extends JFrame
         {
             optionsDisconnected(name,button);
         });
-        disconnected.add(button);  
+        disconnected.add(button);
+        disconnectedList.put(name,button);
     }
     
     private void optionsDisconnected(String name, JButton button)
@@ -151,6 +162,7 @@ public class ChatFrame extends JFrame
             optionsConnected(name, button);
         });
         connected.add(button);
+        connectedList.put(name,button);
     }
     
     
@@ -172,9 +184,8 @@ public class ChatFrame extends JFrame
     
     private void optionsFriends(String name, JButton sender)
     {
-        Amigos_ventana form=new Amigos_ventana(name);
+        Amigos_ventana form=new Amigos_ventana(name,context);
         form.setVisible(true);
-        System.out.println("Hola");
     }
     
     private void configureWindow()
@@ -201,7 +212,6 @@ public class ChatFrame extends JFrame
             creator[i].setLayout(new BoxLayout(creator[i],BoxLayout.Y_AXIS));
             scrolls[i] = new JScrollPane(creator[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
             selector.addTab(titles[i], scrolls[i]);
-            
         }
         
         selector.add(Refresh);
