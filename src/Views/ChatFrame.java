@@ -183,11 +183,12 @@ public class ChatFrame extends JFrame
         this.setTitle("Panel de control CACA");
         selector = new JTabbedPane(JTabbedPane.LEFT);
         this.add(selector);
-        
-        
-        Refresh= new JButton("Refresh");
-        Refresh.setBounds(500, 500, 500, 500);
-        this.add(Refresh);
+
+        Refresh=new JButton("Refrescar");
+        Refresh.addActionListener(e->
+        {
+            /////////////////AQUI VA LA FUNCION DE REFRESH
+        });
         
         JPanel[] creator = new JPanel[6];
         String[] titles = {"Amigos","Grupos","Conectados",
@@ -200,8 +201,10 @@ public class ChatFrame extends JFrame
             creator[i].setLayout(new BoxLayout(creator[i],BoxLayout.Y_AXIS));
             scrolls[i] = new JScrollPane(creator[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
             selector.addTab(titles[i], scrolls[i]);
+            
         }
         
+        selector.add(Refresh);
         
         friends  = creator[0];
         groups = creator[1];
@@ -213,10 +216,12 @@ public class ChatFrame extends JFrame
         
         GroupLayout order = new GroupLayout(this.getContentPane());
         order.setVerticalGroup(order.createSequentialGroup()
-        .addComponent(selector,500,500,500));
+        .addComponent(selector,500,500,500)
+        .addComponent(Refresh));
         
-        order.setHorizontalGroup(order.createSequentialGroup()
-        .addComponent(selector,200,500,600));
+        order.setHorizontalGroup(order.createParallelGroup()
+        .addComponent(selector,200,500,600)
+        .addComponent(Refresh));
         
         
         this.setLayout(order);
