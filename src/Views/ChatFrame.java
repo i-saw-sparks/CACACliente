@@ -126,6 +126,8 @@ public class ChatFrame extends JFrame
     
     private void optionsFriends(String name, JButton sender)
     {
+        Amigos_ventana form=new Amigos_ventana(name);
+        form.setVisible(true);
         System.out.println("Hola");
     }
     
