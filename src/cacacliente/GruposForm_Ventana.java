@@ -22,22 +22,22 @@ import javax.swing.JTextField;
  * @author manie
  */
 public class GruposForm_Ventana extends JFrame{
-    
-    private JButton btt;
     private GroupLayout lay;
     private JTextField tNombre;
-    private JPanel tUsuarios;
     private JButton crear;
-    private JLabel lName, lWelcome, lUser, lLine, lSpace, pUsers;
+    private JLabel lName, lWelcome, lUser, lLine, lSpace;
     private JButton aniadir;
     
-    public GruposForm_Ventana(JButton btt){
-        this.btt = btt;
+    public GruposForm_Ventana(){        
         conf();
     }
     
+    private void addGroup(String name){
+        
+    }
+    
     private void conf(){
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setSize(600, 600);
         this.setTitle("Nuevo Grupo");
         this.getContentPane().setBackground(Color.BLACK);
@@ -49,14 +49,15 @@ public class GruposForm_Ventana extends JFrame{
         Font LucidCal = new Font("Lucida Handwriting", 1, 10);
         Font LucidNom = new Font("Lucida Sans Typewriter", 1, 15);
         tNombre = new JTextField();
-        tUsuarios = new JPanel();
-        tUsuarios.setLayout(new BoxLayout(tUsuarios, BoxLayout.Y_AXIS));
+
+        
+        
         
         crear = new JButton("Log-in");
         crear.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent a){  
-                    putUser(tUsuarios);
+                    addGroup(tNombre.getText());
                 }             
             }
         );
@@ -69,14 +70,11 @@ public class GruposForm_Ventana extends JFrame{
         lUser.setFont(LucidNom);
         lLine = new JLabel("______________________________");
         lSpace = new JLabel(" ");
-        lLine.setForeground(Color.white);        
-        pUsers = new JLabel("Usuarios");
+        lLine.setForeground(Color.white);
         aniadir = new JButton("+");
-        pUsers.setFont(LucidNom);
         lName.setForeground(Color.white);
         lUser.setForeground(Color.white);
         lWelcome.setForeground(Color.white);
-        pUsers.setForeground(Color.white);
         
         lay.setHorizontalGroup(
             lay.createParallelGroup(GroupLayout.Alignment.CENTER)
@@ -93,9 +91,7 @@ public class GruposForm_Ventana extends JFrame{
                             .addGroup(lay.createParallelGroup()
                                 .addComponent(lUser)
                                 .addComponent(tNombre)
-                                .addComponent(pUsers)
-                                .addComponent(aniadir)
-                                .addComponent(tUsuarios, 100, 100, 100)                         
+                                .addComponent(aniadir)                         
                             )
                     )
                     .addGroup(lay.createSequentialGroup()
@@ -123,9 +119,7 @@ public class GruposForm_Ventana extends JFrame{
                             .addGroup(lay.createSequentialGroup()
                                 .addComponent(lUser)
                                 .addComponent(tNombre)
-                                .addComponent(pUsers)
-                                .addComponent(aniadir)
-                                .addComponent(tUsuarios, 100, 100, 100)                         
+                                .addComponent(aniadir)                         
                             )
                     )
                     .addGroup(lay.createParallelGroup()
