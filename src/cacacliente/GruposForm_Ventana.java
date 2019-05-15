@@ -1,14 +1,22 @@
-/*
+
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package cacacliente;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.sun.istack.internal.logging.Logger;
+import controllers.Context;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -27,14 +35,39 @@ public class GruposForm_Ventana extends JFrame{
     private JButton crear;
     private JLabel lName, lWelcome, lUser, lLine, lSpace;
     private JButton aniadir;
+    private Context context;
+    private Socket socket;
     
-    public GruposForm_Ventana(){        
+    public GruposForm_Ventana(Context context){        
         conf();
+        this.context = context;
+        socket = context.getConnection();
     }
     
     private void addGroup(String name){
+        JsonObject envio = new JsonObject();
+        envio.addProperty("type", "newGroup");
         
+        JsonObject args = new JsonObject();
+        args.addProperty("groupName", name);
+        args.addProperty("admin", context.getUsername());
+        
+        envio.add("args", args);
+        
+        Gson gson = new Gson();
+        
+        String packet = gson.toJson(envio);        
+          
+        try 
+        {             
+            byte[] data = packet.getBytes();
+            socket.getOutputStream().write(data);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(GruposForm_Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+       
+           
     
     private void conf(){
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
