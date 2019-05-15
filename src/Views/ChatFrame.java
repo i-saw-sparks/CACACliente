@@ -5,6 +5,8 @@
  */
 package Views;
 
+import controllers.Context;
+import java.awt.Component;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -20,6 +22,7 @@ import javax.swing.JTabbedPane;
 
 public class ChatFrame extends JFrame
 { 
+    Context context;
     JTabbedPane selector;
     JPanel friends;
     JPanel groups;
@@ -27,8 +30,9 @@ public class ChatFrame extends JFrame
     JPanel disconnected;
     JPanel notifications;
     
-    public ChatFrame()
+    public ChatFrame(Context source)
     {
+        this.context = source;
         configureWindow();
         this.setLayout(null);
     }
@@ -36,6 +40,8 @@ public class ChatFrame extends JFrame
     public void addFriend(String name)
     {
         JButton button = new JButton(name);
+        button.setSize(500, 100);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(e->
         {
             optionsFriends(name,button);
@@ -43,9 +49,28 @@ public class ChatFrame extends JFrame
         friends.add(button);
     }
     
+    public void addDisconnected(String name)
+    {
+        JButton button = new JButton(name);
+        button.setSize(500, 100);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.addActionListener(e->
+        {
+            optionsDisconnected(name,button);
+        });
+        friends.add(button);  
+    }
+    
+    private void optionsDisconnected(String name, JButton button)
+    {
+        System.out.println("Probando enviar solicitud de amistad");
+        
+    }
+    
     public void addConnected(String name)
     {
         JButton button = new JButton(name);
+        button.setSize(500,100);
         button.addActionListener(e->
         {
             optionsConnected(name, button);

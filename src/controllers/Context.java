@@ -5,7 +5,9 @@
  */
 package controllers;
 
+import Views.ChatFrame;
 import cacacliente.Login_ventana;
+import java.net.Socket;
 import java.util.ArrayList;
 
 /**
@@ -15,10 +17,30 @@ import java.util.ArrayList;
 public class Context 
 {
     private int counter = 0;
-    String username;
-    ArrayList<String> connectedUsers;
-    Login_ventana logVent;
+    private String username;
+    private ArrayList<String> connectedUsers;
+    private Login_ventana logVent;
+    public ChatFrame chat = null;
+    private Socket connection;
+
+    public ChatFrame getChat() {
+        return chat;
+    }
+
+    public void setChat(ChatFrame chat) {
+        this.chat = chat;
+    }
+
+    public Socket getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Socket connection) {
+        this.connection = connection;
+    }
     
+    
+
     
     public int getCounter() {
         return counter;

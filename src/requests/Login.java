@@ -6,13 +6,9 @@
 package requests;
 
 import Views.ChatFrame;
-import cacacliente.Chat_ventana;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import controllers.Context;
-import controllers.ProcessRequest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,9 +23,10 @@ public class Login
         if (args.get("status").getAsBoolean()) 
         {
             context.getLogVent().setVisible(false);
-            ChatFrame chat = new ChatFrame();
+            ChatFrame chat = new ChatFrame(context);
             chat.setVisible(true);
             
+            context.chat = chat;
             
             JsonArray connected = args.get("connected").getAsJsonArray();
             connected.forEach(u -> 
@@ -45,9 +42,8 @@ public class Login
                 JsonObject user = u.getAsJsonObject();
                 String username = user.get("username").getAsString();
                 System.out.println(username);
-                chat.addFriend(username);
-            });            
-            
+                chat.addDisconnected(username);
+            });
         }
         else 
         {

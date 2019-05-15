@@ -21,6 +21,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -30,7 +31,8 @@ import javax.swing.JTextField;
 public class Login_ventana extends JFrame {
 
     protected JButton bLog, bSign;
-    protected JTextField tUser, tPassword;
+    protected JTextField tUser;
+    protected JPasswordField tPassword;
     protected JLabel lName, lWelcome, lUser, lPassword, lLine, lSpace;
     private GroupLayout lay;
     private Socket socket;
@@ -45,6 +47,7 @@ public class Login_ventana extends JFrame {
         try 
         {
             socket = new Socket("127.0.0.1", 1000);
+            context.setConnection(socket);
             
             Thread thread  = new Thread(()->
             {
@@ -153,7 +156,7 @@ public class Login_ventana extends JFrame {
         Font LucidCal = new Font("Lucida Handwriting", 1, 10);
         Font LucidNom = new Font("Lucida Sans Typewriter", 1, 15);
         tUser = new JTextField();
-        tPassword = new JTextField();
+        tPassword = new JPasswordField();
 
         bLog = new JButton("Log-in");
         bLog.addActionListener(new ActionListener() {
