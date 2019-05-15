@@ -7,6 +7,7 @@ package controllers;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import requests.FriendRequestResponse;
 import requests.Login;
 import requests.Sign;
 
@@ -38,6 +39,8 @@ public class ProcessRequest {
                 Login login = new Login(response.get("args").getAsJsonObject(), context);
                 break;
             default:
+            case "friend-request":
+                FriendRequestResponse resp = new FriendRequestResponse(response.get("status").getAsBoolean(),context);
                 break;
         }
     }

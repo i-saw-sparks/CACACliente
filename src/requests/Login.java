@@ -44,6 +44,14 @@ public class Login
                 System.out.println(username);
                 chat.addDisconnected(username);
             });
+            JsonArray notifications = args.get("notifications").getAsJsonArray();
+            notifications.forEach(u ->
+            {
+                JsonObject element = u.getAsJsonObject();
+                String name  = element.get("origin").getAsString();
+                String type = element.get("type").getAsString();
+                chat.addNotification(name, type);
+            });
         }
         else 
         {
