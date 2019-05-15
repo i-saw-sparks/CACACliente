@@ -13,17 +13,23 @@ import javax.swing.JOptionPane;
  */
 public class Sign 
 {
+    JOptionPane alert = new JOptionPane();
+    
+    public Sign(boolean status, String extra)
+    {
+        
+    }
+    
     public Sign(boolean status) 
     {
-        JOptionPane alert = new JOptionPane();
         if (status) 
         {
-            alert.showMessageDialog(null, "El usuario ha sido registrado correctamente");
+            alert.showMessageDialog(null, "Operación completada con éxito");
         }
         else 
         {
-            alert.showMessageDialog(null, "Ha ocurrido un error y no se ha podido registrar el usuario."
-                    + "Pruebe con otro nombre de usuario.");
+            alert.showMessageDialog(null, "La operación no ha podido ser completada"
+                    + "\n con éxito");
         }
     }
 }
