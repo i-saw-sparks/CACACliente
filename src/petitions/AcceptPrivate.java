@@ -22,6 +22,5 @@ public class AcceptPrivate {
         UnfriendChatFrame fr = new UnfriendChatFrame(request,context);
         
         context.getuChats().put(request, fr);
-        
     }
 }

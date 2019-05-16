@@ -11,6 +11,7 @@ import petitions.AcceptPrivate;
 import petitions.NewGroupMessage;
 import petitions.NewMessage;
 import petitions.NewPrivateRequest;
+import petitions.PrivateMessage;
 import requests.ChargeConversation;
 import requests.ChargeGroupConversation;
 import requests.FriendRequestResponse;
@@ -84,6 +85,9 @@ public class ProcessRequest {
                 break;
             case  "accept-private":
                 new AcceptPrivate(response.get("args").getAsJsonObject(),context);
+                break;
+            case "privateMessage":
+                new PrivateMessage(response.get("args").getAsJsonObject(),context);
                 break;
             default:
                 System.out.println("No coincide");

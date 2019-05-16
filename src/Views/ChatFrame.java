@@ -113,8 +113,9 @@ public class ChatFrame extends JFrame {
         frame.setVisible(true);
     }
     
-    private void optionsNotification(String name, String type) {
-        if (!type.equals("friend-unnacepted")) {
+    private void optionsNotification(String name, String type) 
+    {
+        if (!type.equals("friend-unnacepted") && !type.equals("chat")) {
             RequestFrame form = new RequestFrame(name, type, context);
             form.setVisible(true);
         }
