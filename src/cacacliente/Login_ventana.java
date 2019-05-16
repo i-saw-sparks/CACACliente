@@ -44,10 +44,11 @@ public class Login_ventana extends JFrame {
         configuracion();
         System.out.println("Conectando...");
         context = new Context();
-        try 
+        try
         {
             socket = new Socket("127.0.0.1", 1000);
             context.setConnection(socket);
+            this.setVisible(true);
             
             Thread thread  = new Thread(()->
             {
@@ -64,7 +65,6 @@ public class Login_ventana extends JFrame {
                            {
                                 ProcessRequest.processRequest(res, context);
                            }
-                           
                        }
                    } catch (IOException ex) {
                        Logger.getLogger(Login_ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,11 +74,10 @@ public class Login_ventana extends JFrame {
             
             thread.start();
             
-        } catch (IOException ex) {
+        } catch (IOException  ex) {
             Logger.getLogger(Login_ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        
+            this.setVisible(false);
+        }       
     }
 
     void bLog() {

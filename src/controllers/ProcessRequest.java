@@ -44,11 +44,15 @@ public class ProcessRequest {
                 FriendRequestResponse resp = new FriendRequestResponse(response.get("status").getAsBoolean(),context);
                 login = new Login(context,response.get("args").getAsJsonObject());
                 break;
+            case "refresh":
+                login = new Login(context,response.get("args").getAsJsonObject());
+                break; 
             case "exit":
-                 sign = new Sign(response.get("status").getAsBoolean());
-                 login = new Login(context,response.get("args").getAsJsonObject());
-                 break;
             case "newGroup":
+            case "modifyGroup":
+            case "deleteGroup":
+            case "modifyAlias":
+            case "add-to-group":
                 sign = new Sign(response.get("status").getAsBoolean());
                 login = new Login(context,response.get("args").getAsJsonObject());
                 break;

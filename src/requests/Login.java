@@ -72,7 +72,14 @@ public class Login
                 JsonObject element = u.getAsJsonObject();
                 String name  = element.get("origin").getAsString();
                 String type = element.get("type").getAsString();
-                chat.addNotification(name, type);
+                if(type.equals("group"))
+                {
+                    chat.addNotification(name, type, element.get("id").getAsString());
+                }
+                else 
+                {
+                    chat.addNotification(name, type);
+                }
             });
             
             JsonArray amigos = args.get("friends").getAsJsonArray();
