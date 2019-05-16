@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Views;
 
 
@@ -35,13 +30,20 @@ public class Amigos_ventana extends JFrame {
     private Socket socket;
     Context context;
     
+    /**
+     * Contructor de ventana que muestra opciones de amigos
+     * @param name nombre del amigo en cuentión
+     * @param con contexto del chat frame
+     */
     public Amigos_ventana(String name,Context con) {
         this.UserName=name;
         this.context=con;
         configuracion();  
     }
        
-    
+    /**
+     * Ejecuta la request para abrir la ventana de chat con un amigo y cargar el historial
+     */
     void bChat() {
         try {
             FriendChatFrame form=new FriendChatFrame(UserName,context);
@@ -64,6 +66,9 @@ public class Amigos_ventana extends JFrame {
         }
     }
 
+    /**
+     * Ejecuta la petición al servidor para cambiar el alias de un amigo
+     */
     void bAlias() 
     {
         JsonObject req = new JsonObject();
@@ -89,7 +94,9 @@ public class Amigos_ventana extends JFrame {
         return;
     }
     
-    
+    /**
+     * Configuraciones de la ventana de opciones de amigo
+     */
     public void configuracion() {
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setSize(1000, 1000);

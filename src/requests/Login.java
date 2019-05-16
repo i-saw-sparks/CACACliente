@@ -12,7 +12,7 @@ import controllers.Context;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *Clase que se encarga de procesar las peticiones para el login
  * @author ivan_
  */
 public class Login 
@@ -20,6 +20,11 @@ public class Login
     Context context;
     ChatFrame chat;
     
+    /**
+     * Constructor
+     * @param contextcontexto
+     * @param args argumentos de la petición
+     */
     public Login(Context context, JsonObject args)
     {
         this.chat = context.chat;
@@ -27,6 +32,11 @@ public class Login
         updatePanel(args);
     }
     
+    /**
+     * Constructor en caso de llegar a limite de pruebas
+     * @param args
+     * @param context 
+     */
     public Login(JsonObject args, Context context) 
     {
         this.context = context;
@@ -48,7 +58,10 @@ public class Login
             }
         }
     }
-    
+    /**
+     * Se encarga de recibir la lista de usuarios cuando se conecta
+     * @param args argumentos de la petición
+     */
     public void updatePanel(JsonObject args)
     {
             JsonArray connected = args.get("connected").getAsJsonArray();

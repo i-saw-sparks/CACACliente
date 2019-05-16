@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import Views.ChatFrame;
@@ -15,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 /**
- *
+ * Clase que mantiene el contexto del chat
  * @author manie
  */
 public class Context 
@@ -30,6 +25,9 @@ public class Context
     private Hashtable<String, FriendChatFrame> chats = new Hashtable<>();
     private Hashtable<String, UnfriendChatFrame> uChats = new Hashtable();
 
+    /**
+     * Getters y setters
+     */
     public Hashtable<String, UnfriendChatFrame> getuChats() {
         return uChats;
     }

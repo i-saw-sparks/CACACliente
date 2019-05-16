@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 import controllers.Context;
 
 /**
- *
+ *Procesa la petición para aceptar invitación a un chat privado
  * @author ivan_
  */
 public class AcceptPrivate {

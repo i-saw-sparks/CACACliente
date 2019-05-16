@@ -25,7 +25,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- *
+ *Ventana del login y registro
  * @author Claudia
  */
 public class Login_ventana extends JFrame {
@@ -39,6 +39,9 @@ public class Login_ventana extends JFrame {
     private int counter = 0;
     private Context context;
     
+    /**
+     * Conexión con el servidor
+     */
     public Login_ventana() 
     {
         configuracion();
@@ -80,6 +83,9 @@ public class Login_ventana extends JFrame {
         }       
     }
 
+    /**
+     * Ventana con barras para logueo
+     */
     void bLog() {
         context.setCounter(context.getCounter()+1);
         String user = tUser.getText();
@@ -110,6 +116,9 @@ public class Login_ventana extends JFrame {
         }
     }
 
+    /**
+     * Botón para registro
+     */
     void bSign() {
         String user = tUser.getText();
         String password = tPassword.getText();
@@ -140,6 +149,9 @@ public class Login_ventana extends JFrame {
     public void connect() {
     }
 
+    /**
+     * Configuración iniciar de la ventana
+     */
     protected void configuracion() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 600);

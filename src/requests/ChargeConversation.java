@@ -12,7 +12,7 @@ import controllers.Context;
 import java.util.Hashtable;
 
 /**
- *
+ *Procesa la petición para recibir el historial de un chat
  * @author ivan_
  */
 public class ChargeConversation 

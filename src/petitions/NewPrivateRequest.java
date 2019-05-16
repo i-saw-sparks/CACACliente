@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import controllers.Context;
 
 /**
- *
+ *Procesa la petición para iniciar una conversación privada
  * @author ivan_
  */
 public class NewPrivateRequest 

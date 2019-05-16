@@ -1,9 +1,3 @@
-
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Views;
 
 import com.google.gson.Gson;
@@ -24,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
+ *Ventana para crear nuevo grupo
  * @author manie
  */
 public class GruposForm_Ventana extends JFrame{
@@ -36,6 +30,10 @@ public class GruposForm_Ventana extends JFrame{
     private Context context;
     private Socket socket;
     
+    /**
+     * Contructor
+     * @param context  contexto
+     */
     public GruposForm_Ventana(Context context){        
         conf();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -43,6 +41,10 @@ public class GruposForm_Ventana extends JFrame{
         socket = context.getConnection();
     }
     
+    /**
+     * Función para agregar un nuevo grupo con el nombre deseado
+     * @param name 
+     */
     private void addGroup(String name){
         System.out.println("aqui");
         JsonObject envio = new JsonObject();
@@ -69,7 +71,9 @@ public class GruposForm_Ventana extends JFrame{
     }
        
            
-    
+    /**
+     * Configuración inicial del chat
+     */
     private void conf(){
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setSize(600, 600);
@@ -84,10 +88,6 @@ public class GruposForm_Ventana extends JFrame{
         Font LucidNom = new Font("Lucida Sans Typewriter", 1, 15);
         tNombre = new JTextField();
 
-        
-        
- 
-        
         
         lName = new JLabel("Clientes Adoran Chatear Aqui");
         lName.setFont(LucidCal);
@@ -172,6 +172,10 @@ public class GruposForm_Ventana extends JFrame{
         this.pack();
     }
     
+    /**
+     * Agrega el usuario al panel del grupo
+     * @param panel panel que contiene a los usuarios del grupo
+     */
     private void putUser(JPanel panel){
         JTextField user;
         user = new JTextField();

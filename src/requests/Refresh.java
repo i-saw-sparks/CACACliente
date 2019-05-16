@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Se encarga de refrescar la ventana y mostrar los botones actualizados
  * @author ivan_
  */
 public class Refresh 

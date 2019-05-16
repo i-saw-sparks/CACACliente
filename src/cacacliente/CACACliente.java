@@ -12,6 +12,10 @@ package cacacliente;
  */
 public class CACACliente {
 
+    /**
+     * Solo abre el login
+     * @param args 
+     */
     public static void main(String[] args) {
         /*Chat_ventana objeto = null;
         try {
