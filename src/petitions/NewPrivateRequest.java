@@ -18,6 +18,6 @@ public class NewPrivateRequest
     {
         String request = args.get("request").getAsString();
         String requester = args.get("requester").getAsString();
-        context.getChat().addNotification(request, "chat");
+        context.getChat().addNotification(requester, "chat");
     }
 }

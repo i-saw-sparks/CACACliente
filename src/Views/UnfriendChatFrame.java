@@ -1,10 +1,15 @@
 package Views;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import controllers.Context;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.GroupLayout;
@@ -45,7 +50,8 @@ public class UnfriendChatFrame extends JFrame{
 
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(WindowEvent e) 
+            {
                 context.getChats().remove(userName);
             }
         });
@@ -107,12 +113,26 @@ public class UnfriendChatFrame extends JFrame{
     }
  
     public void EnviarMensaje(){
-        ////Aqui se envia el mensaje          escribirMensaje.getText()      es el mensaje a enviar
-        mensajesArea.setText("Yo mero:\n" +escribirMensaje.getText()+ "\n\n"+ mensajesArea.getText());
-        escribirMensaje.setText("");
+        try {
+            JsonObject req = new JsonObject();
+            req.addProperty("type", "privateMessage");
+            
+            JsonObject args = new JsonObject();
+            args.addProperty("destinatario",userName );
+            args.addProperty("remitente", context.getUsername());
+            args.addProperty("mensaje", escribirMensaje.getText());
+            
+            req.add("args", args);
+            
+            this.context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+            
+            escribirMensaje.setText("");
+        } catch (IOException ex) {
+            Logger.getLogger(UnfriendChatFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void AgregarMensaje(String origen,String mensaje){
-        mensajesArea.setText(origen+ ": \n" +mensaje+ "\n\n"+ mensajesArea.getText());
+        mensajesArea.setText(mensajesArea.getText()+origen+ ": \n" +mensaje+ "\n");
     }
 }
