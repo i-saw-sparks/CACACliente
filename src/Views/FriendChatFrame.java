@@ -1,10 +1,15 @@
 package Views;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import controllers.Context;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -96,13 +101,29 @@ public class FriendChatFrame extends JFrame{
         this.pack();
     }
  
-    public void EnviarMensaje(){
-        ////Aqui se envia el mensaje          escribirMensaje.getText()      es el mensaje a enviar
-        mensajesArea.setText("Yo mero:\n" +escribirMensaje.getText()+ "\n\n"+ mensajesArea.getText());
-        escribirMensaje.setText("");
+    public void EnviarMensaje()
+    {
+        try {
+            JsonObject req = new JsonObject();
+            
+            req.addProperty("type", "newPersonal");
+            
+            JsonObject args = new JsonObject();
+            args.addProperty("remitente", context.getUsername());
+            args.addProperty("destinatario", userName);
+            args.addProperty("mssg", escribirMensaje.getText());
+            
+            req.add("args", args);
+            
+            context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+            
+            escribirMensaje.setText("");
+        } catch (IOException ex) {
+            Logger.getLogger(FriendChatFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void AgregarMensaje(String origen,String mensaje){
-        mensajesArea.setText(origen+ ": \n" +mensaje+ "\n\n"+ mensajesArea.getText());
+        mensajesArea.setText(mensajesArea.getText()+origen+ ": \n" +mensaje+ "\n\n");
     }
 }

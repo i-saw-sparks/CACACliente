@@ -43,9 +43,25 @@ public class Amigos_ventana extends JFrame {
        
     
     void bChat() {
-        FriendChatFrame form=new FriendChatFrame(UserName,context);
-        form.setVisible(true);
-        return;
+        try {
+            FriendChatFrame form=new FriendChatFrame(UserName,context);
+            JsonObject req = new JsonObject();
+            req.addProperty("type", "getPersonal");
+            JsonObject args = new JsonObject();
+            args.addProperty("user1", context.getUsername());
+            args.addProperty("user2", this.UserName);
+            req.add("args", args);
+            
+            context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+            form.setVisible(true);
+            
+            context.getChats().put(UserName, form);
+            
+            
+            return;
+        } catch (IOException ex) {
+            Logger.getLogger(Amigos_ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     void bAlias() 
