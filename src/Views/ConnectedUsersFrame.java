@@ -38,8 +38,8 @@ public class ConnectedUsersFrame extends JFrame{
         Font fuente1 = new Font("Calibri", 1, 15);
         Font fuente2 = new Font("Calibri", 1, 20);
         
-        botones=new JButton[3]; 
-        for(int i=0;i<3;i++){
+        botones=new JButton[2]; 
+        for(int i=0;i<2;i++){
                 botones[i]=new JButton();
                 botones[i].setFont(fuente1);
         }
@@ -56,16 +56,8 @@ public class ConnectedUsersFrame extends JFrame{
                 }             
             }
         );
-        botones[1].setText("Abrir chat");
+        botones[1].setText("Iniciar conversación");
         botones[1].addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent a){  
-                    OpenChat();
-                }             
-            }
-        );
-        botones[2].setText("Iniciar conversación");
-        botones[2].addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent a){  
                     StartConversation();
@@ -80,22 +72,14 @@ public class ConnectedUsersFrame extends JFrame{
         orden.setHorizontalGroup(
           orden.createParallelGroup()
                 .addComponent(NombreUsuario)
-                .addGroup(
-                        orden.createSequentialGroup()
-                        .addComponent(botones[0],15,150,550)
-                        .addComponent(botones[1],15,100,550) 
-                )
-                .addComponent(botones[2],15,150,1000)
+                .addComponent(botones[0],15,100,550) 
+                .addComponent(botones[1],15,150,1000)
         );
         orden.setVerticalGroup(
                 orden.createSequentialGroup()
                     .addComponent(NombreUsuario)
-                    .addGroup(
-                            orden.createParallelGroup()
-                            .addComponent(botones[0],10,30,400)
-                            .addComponent(botones[1],10,30,400)
-                    )
-                    .addComponent(botones[2],10,30,400)
+                    .addComponent(botones[0],10,30,400)
+                    .addComponent(botones[1],10,30,400)
         );
         this.setLayout(orden);
         this.pack();
@@ -103,11 +87,6 @@ public class ConnectedUsersFrame extends JFrame{
     
     public void AddFriend(){
         new FriendRequest(context, UserName);
-        return;
-    }
-    
-    public void OpenChat(){
-
         return;
     }
     
