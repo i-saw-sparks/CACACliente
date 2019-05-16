@@ -33,6 +33,7 @@ public class UnfriendChatFrame extends JFrame{
         this.userName=name;
         this.context=con;
         Configuracion();
+        this.setVisible(true);
     }
     
     public void Configuracion(){

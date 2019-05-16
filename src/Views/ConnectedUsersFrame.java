@@ -1,10 +1,15 @@
 package Views;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import controllers.Context;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -90,8 +95,23 @@ public class ConnectedUsersFrame extends JFrame{
         return;
     }
     
-    public void StartConversation(){
-
-        return;
+    public void StartConversation()
+    {
+        try {
+            JsonObject req = new JsonObject();
+            
+            req.addProperty("type", "private-request");
+            
+            JsonObject args = new JsonObject();
+            args.addProperty("requester", context.getUsername());
+            args.addProperty("request", UserName);
+            
+            req.add("args",args);
+            this.context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+            
+            return;
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectedUsersFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

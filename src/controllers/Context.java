@@ -8,6 +8,7 @@ package controllers;
 import Views.ChatFrame;
 import Views.FriendChatFrame;
 import Views.GroupChatFrame;
+import Views.UnfriendChatFrame;
 import cacacliente.Login_ventana;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -27,6 +28,15 @@ public class Context
     private Socket connection;
     private Hashtable<String, GroupChatFrame> gChats = new Hashtable<>();
     private Hashtable<String, FriendChatFrame> chats = new Hashtable<>();
+    private Hashtable<String, UnfriendChatFrame> uChats = new Hashtable();
+
+    public Hashtable<String, UnfriendChatFrame> getuChats() {
+        return uChats;
+    }
+
+    public void setuChats(Hashtable<String, UnfriendChatFrame> uChats) {
+        this.uChats = uChats;
+    }
 
     public Hashtable<String, GroupChatFrame> getgChats() {
         return gChats;
