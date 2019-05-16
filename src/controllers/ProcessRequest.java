@@ -7,6 +7,10 @@ package controllers;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import petitions.NewGroupMessage;
+import petitions.NewMessage;
+import requests.ChargeConversation;
+import requests.ChargeGroupConversation;
 import requests.FriendRequestResponse;
 import requests.Login;
 import requests.Sign;
@@ -53,10 +57,25 @@ public class ProcessRequest {
             case "deleteGroup":
             case "modifyAlias":
             case "add-to-group":
+            case "accept-group-request":
                 sign = new Sign(response.get("status").getAsBoolean());
                 login = new Login(context,response.get("args").getAsJsonObject());
                 break;
+            case "responseChat":
+                new ChargeConversation(response.get("with").getAsString(),response.get("args").getAsJsonArray(),context);
+                break;
+            case "responseGroup":
+                new ChargeGroupConversation(response.get("id").getAsString(),response.get("args").getAsJsonArray(),context);
+                break;
+            case "newPersonalMssg":
+                System.out.println("Recibí mensaje");
+                new NewMessage(response.get("args").getAsJsonObject(),context);
+                break;
+            case "newGroupMssg":
+                new NewGroupMessage(response.get("args").getAsJsonObject(),context);
+                break;
             default:
+                System.out.println("No coincide");
         }
     }
 }

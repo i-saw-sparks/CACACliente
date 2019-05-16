@@ -6,9 +6,12 @@
 package controllers;
 
 import Views.ChatFrame;
+import Views.FriendChatFrame;
+import Views.GroupChatFrame;
 import cacacliente.Login_ventana;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  *
@@ -22,6 +25,27 @@ public class Context
     private Login_ventana logVent;
     public ChatFrame chat = null;
     private Socket connection;
+    private Hashtable<String, GroupChatFrame> gChats = new Hashtable<>();
+    private Hashtable<String, FriendChatFrame> chats = new Hashtable<>();
+
+    public Hashtable<String, GroupChatFrame> getgChats() {
+        return gChats;
+    }
+
+    public void setgChats(Hashtable<String, GroupChatFrame> gChats) {
+        this.gChats = gChats;
+    }
+
+    public Hashtable<String, FriendChatFrame> getChats() 
+    {
+        return chats;
+    }
+
+    public void setChats(Hashtable<String, FriendChatFrame> chats) 
+    {
+        this.chats = chats;
+    }
+    
 
     public ChatFrame getChat() {
         return chat;

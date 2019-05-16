@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout;
@@ -143,8 +144,26 @@ public class GroupFrame extends JFrame{
     }
     
     public void OpenChat(){
-        GroupChatFrame form=new GroupChatFrame(id,username,context); 
+        GroupChatFrame form=new GroupChatFrame(id,username,context);
         form.setVisible(true);
+        Hashtable<String, GroupChatFrame> chats = context.getgChats();
+        chats.put(id, form);
+        
+        try {
+            JsonObject req = new JsonObject();
+            
+            req.addProperty("type", "getGroup");
+            JsonObject args = new JsonObject();
+            
+            args.addProperty("id",id);
+            req.add("args", args);
+            
+            context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+            form.setVisible(true); 
+            return;
+        } catch (IOException ex) {
+            Logger.getLogger(Amigos_ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return;
     }
     
