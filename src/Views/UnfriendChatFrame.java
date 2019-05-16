@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,19 +35,27 @@ public class UnfriendChatFrame extends JFrame{
     private JButton enviar;
     Context context;
 
-    
     public UnfriendChatFrame(String name,Context con){
         this.userName=name;
         this.context=con;
         Configuracion();
         this.setVisible(true);
     }
-    
+ 
+
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Chat con "+userName);
         this.getContentPane().setBackground(Color.black);
 
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                context.getChats().remove(userName);
+            }
+        });
+         
         Font LucidNom = new Font("Lucida Sans Typewriter", 1, 15);    
         Font fuente1 = new Font("Calibri", 1, 15);
         Font fuente2 = new Font("Calibri", 1, 20);
