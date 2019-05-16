@@ -24,7 +24,6 @@ public class CACACliente {
 
         //objeto.setVisible(true);
         Login_ventana objeto2=new Login_ventana();
-        objeto2.setVisible(true);
     }
     
 }

@@ -6,16 +6,22 @@
 package Views;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import controllers.Context;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Oscar
@@ -41,10 +47,29 @@ public class Amigos_ventana extends JFrame {
         return;
     }
 
-    void bAlias() {
-
+    void bAlias() 
+    {
+        JsonObject req = new JsonObject();
+        req.addProperty("type", "setAlias");
+        JsonObject args = new JsonObject();
+        
+        String alias =  JOptionPane.showInputDialog("Seleccione el nuevo nombre");
+        
+        if(alias!=null && !alias.equals(""))
+        {
+            try {
+                args.addProperty("username", context.getUsername());
+                args.addProperty("friend", UserName);
+                args.addProperty("alias", alias);
+                
+                req.add("args",args);
+                
+                context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+            } catch (IOException ex) {
+                Logger.getLogger(Amigos_ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return;
-
     }
     
     

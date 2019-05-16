@@ -1,15 +1,20 @@
 package Views;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import controllers.Context;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import petitions.FriendRequest;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,14 +24,15 @@ public class GroupFrame extends JFrame{
     
     private JButton[] botones;
     GroupLayout orden;
-    private String UserName;
+    private String username;
     private JLabel NombreUsuario;
     private String id;
     Context context;
+    private String name;
 
     
     public GroupFrame(String id,String name,Context con){
-        this.UserName=name;
+        this.username=name;
         this.context=con;
         this.id=id;
         Configuracion();
@@ -34,7 +40,7 @@ public class GroupFrame extends JFrame{
     
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Usuario conectado "+UserName);
+        this.setTitle("Opciones para grupo "+username);
         this.getContentPane().setBackground(Color.black);
 
         Font LucidNom = new Font("Lucida Sans Typewriter", 1, 15);    
@@ -47,7 +53,7 @@ public class GroupFrame extends JFrame{
                 botones[i].setFont(fuente1);
         }
         
-        NombreUsuario=new JLabel(UserName); 
+        NombreUsuario=new JLabel(username); 
         NombreUsuario.setFont(LucidNom);
         NombreUsuario.setForeground(Color.white);
         
@@ -115,7 +121,23 @@ public class GroupFrame extends JFrame{
         this.pack();
     }
     
-    public void AddToGroup(){
+    public void AddToGroup()
+    {
+        JsonObject resp = new JsonObject();
+        resp.addProperty("type", "add-to-group");
+        JsonObject args = new JsonObject();
+        args.addProperty("id", id);
+        String path = JOptionPane.showInputDialog("Escriba el nombre de usuario a agregar a grupo");
+        if(path!=null && !path.equals(""))
+        {
+            try {
+                args.addProperty("username",path);
+                resp.add("args", args);
+                context.getConnection().getOutputStream().write(new Gson().toJson(resp).getBytes());
+            } catch (IOException ex) {
+                Logger.getLogger(GroupFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         return;
     }
@@ -125,12 +147,48 @@ public class GroupFrame extends JFrame{
         return;
     }
     
-    public void DeleteGroup(){
-
+    public void DeleteGroup()
+    {
+         int input = JOptionPane.showConfirmDialog(null, "¿Quiere eliminar el grupo?","Eliminar grupo",
+				JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+         if(input == 0)
+         {
+             try {
+                 JsonObject req = new JsonObject();
+                 req.addProperty("type", "deleteGroup");
+                 JsonObject args = new JsonObject();
+                 
+                 args.addProperty("admin", context.getUsername());
+                 args.addProperty("groupId", id);
+                 
+                 req.add("args", args);
+                 
+                 context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+             } catch (IOException ex) {
+                 Logger.getLogger(GroupFrame.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }
         return;
     }
     
     public void RenameGroup(){
-        return;
+        try {
+            String path = JOptionPane.showInputDialog("Seleccione el nuevo nombre");
+
+            if(path!=(null) && !path.equals(""))
+            {
+                JsonObject req = new JsonObject();
+                req.addProperty("type", "modifyGroup");
+                JsonObject args = new JsonObject();
+                args.addProperty("groupId",id );
+                args.addProperty("name", path);
+                args.addProperty("admin", context.getUsername());
+                req.add("args", args);
+
+                context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());   
+            }            
+        } catch (IOException ex) {
+            Logger.getLogger(GroupFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

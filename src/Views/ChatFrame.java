@@ -8,6 +8,8 @@ package Views;
 import controllers.Context;
 import java.awt.Component;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -15,8 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import petitions.FriendAccept;
-import petitions.FriendRequest;
+import requests.Refresh;
 
 /**
  *
@@ -75,12 +76,16 @@ public class ChatFrame extends JFrame
         {
             case "friend":
                 label.setText("Solicitud de "+name);
+                break;
             case "group":
                 label.setText("Solicitud de ingreso al grupo "+name);
+                break;
             case "chat":
                 label.setText("Solicitud de chat privado con "+name);
+                break;
             case "friend-unnacepted":
                 label.setText("Solicitud pendiente a "+name);
+                break;
         }
         
         label.addActionListener( e -> 
@@ -157,6 +162,7 @@ public class ChatFrame extends JFrame
     {
         JButton button = new JButton(name);
         button.setSize(500,100);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(e->
         {
             optionsConnected(name, button);
@@ -188,6 +194,12 @@ public class ChatFrame extends JFrame
         form.setVisible(true);
     }
     
+    public void refresh()
+    {
+        this.revalidate();
+        this.repaint();
+    }
+    
     private void configureWindow()
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -198,7 +210,14 @@ public class ChatFrame extends JFrame
         Refresh=new JButton("Refrescar");
         Refresh.addActionListener(e->
         {
-            /////////////////AQUI VA LA FUNCION DE REFRESH
+            try {
+                new Refresh(context);
+                Thread.sleep(1500);
+                refresh();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ChatFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
         });
         
         JPanel[] creator = new JPanel[6];
@@ -226,11 +245,11 @@ public class ChatFrame extends JFrame
         
         GroupLayout order = new GroupLayout(this.getContentPane());
         order.setVerticalGroup(order.createSequentialGroup()
-        .addComponent(selector,500,500,500)
+        .addComponent(selector,300,300,300)
         .addComponent(Refresh));
         
         order.setHorizontalGroup(order.createParallelGroup()
-        .addComponent(selector,200,500,600)
+        .addComponent(selector,350,350,350)
         .addComponent(Refresh));
         
         
