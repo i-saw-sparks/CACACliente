@@ -11,7 +11,7 @@ import controllers.Context;
 import java.util.Hashtable;
 
 /**
- *
+ *Procesa la petición para enviar mensaje privado
  * @author ivan_
  */
 public class PrivateMessage 

@@ -19,7 +19,7 @@ import requests.Login;
 import requests.Sign;
 
 /**
- *
+ *Esta clase procesa las peticiones que recibe del servidor
  * @author manie
  */
 public class ProcessRequest {
@@ -30,6 +30,11 @@ public class ProcessRequest {
         parser = new JsonParser();
     }
 
+    /**
+     * Lee el json proviniente del servidor y ejecuta su correspondiente proceso
+     * @param request nombre de la petición
+     * @param context contexto
+     */
     public static void processRequest(String request, Context context) {
         JsonObject response;
         System.out.println(request);

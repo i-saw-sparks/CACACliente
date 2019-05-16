@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Procesa la petición para enviar solicitud de amista
  * @author ivan_
  */
 public class FriendRequest {

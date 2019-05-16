@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- *
+ *Form para mostrar opciones de amigo
  * @author usuario
  */
 public class FriendChatFrame extends JFrame{
@@ -33,13 +33,19 @@ public class FriendChatFrame extends JFrame{
     private JButton enviar;
     Context context;
 
-    
+    /**
+     * Constructor 
+     * @param name nombre del usuario a agregar
+     * @param con contexto de group form
+     */
     public FriendChatFrame(String name,Context con){
         this.userName=name;
         this.context=con;
         Configuracion();
     }
-    
+    /**
+     * Configuración básica de la ventana
+     */
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Chat con "+userName);
@@ -100,7 +106,10 @@ public class FriendChatFrame extends JFrame{
         this.setLayout(orden);
         this.pack();
     }
- 
+    
+    /**
+     * Envía petición para generar un mensaje y agregarlo a la base de datos
+     */
     public void EnviarMensaje()
     {
         try {
@@ -123,6 +132,11 @@ public class FriendChatFrame extends JFrame{
         }
     }
     
+    /**
+     * Añade un mensaje dentro del text area
+     * @param origen
+     * @param mensaje 
+     */
     public void AgregarMensaje(String origen,String mensaje){
         mensajesArea.setText(mensajesArea.getText()+origen+ ": \n" +mensaje+ "\n\n");
     }

@@ -8,7 +8,7 @@ package requests;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *Procesa la petición para enviar una petición de registro
  * @author ivan_
  */
 public class Sign 

@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *Ventana que abre opciones de grupo
  * @author usuario
  */
 public class GroupFrame extends JFrame{
@@ -31,14 +31,21 @@ public class GroupFrame extends JFrame{
     Context context;
     private String name;
 
-    
+    /**
+     * Constructor
+     * @param id ide del grupo
+     * @param name nombre del grupo
+     * @param con contexto de chatframe
+     */
     public GroupFrame(String id,String name,Context con){
         this.username=name;
         this.context=con;
         this.id=id;
         Configuracion();
     }
-    
+    /**
+     * Configuración inicial de la ventana
+     */
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Opciones para grupo "+username);
@@ -121,7 +128,9 @@ public class GroupFrame extends JFrame{
         this.setLayout(orden);
         this.pack();
     }
-    
+    /**
+     * Envía peticion para agregar usuarios al grupo
+     */
     public void AddToGroup()
     {
         JsonObject resp = new JsonObject();
@@ -143,6 +152,9 @@ public class GroupFrame extends JFrame{
         return;
     }
     
+    /**
+     * Abre ventana para el chat y manda petición para cargar el historial
+     */
     public void OpenChat(){
         GroupChatFrame form=new GroupChatFrame(id,username,context);
         form.setVisible(true);
@@ -166,7 +178,9 @@ public class GroupFrame extends JFrame{
         }
         return;
     }
-    
+    /**
+     * Petición para eliminar grupo
+     */
     public void DeleteGroup()
     {
          int input = JOptionPane.showConfirmDialog(null, "¿Quiere eliminar el grupo?","Eliminar grupo",
@@ -190,7 +204,9 @@ public class GroupFrame extends JFrame{
          }
         return;
     }
-    
+    /**
+     * Petición para renombrar el grupo en la base de datos
+     */
     public void RenameGroup(){
         try {
             String path = JOptionPane.showInputDialog("Seleccione el nuevo nombre");

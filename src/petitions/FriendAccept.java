@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Procesa la petición para aceptar solicitud de amista
  * @author ivan_
  */
 public class FriendAccept 

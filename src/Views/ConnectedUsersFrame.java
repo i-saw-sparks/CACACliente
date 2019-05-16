@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import petitions.FriendRequest;
 
 /**
- *
+ *Form de opciones para usuarios conectados
  * @author usuario
  */
 public class ConnectedUsersFrame extends JFrame{
@@ -28,12 +28,21 @@ public class ConnectedUsersFrame extends JFrame{
     private JLabel NombreUsuario;
     Context context;
     
+    /**
+     * Contructor
+     * @param name nombre del usuario conectado
+     * @param con contexto de groupform
+     */
     public ConnectedUsersFrame(String name,Context con){
         this.UserName=name;
         this.context=con;
         Configuracion();
     }
     
+    
+    /**
+     * Configuración inicial de laventana con sus botones y listeners respectivos
+     */
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Usuario conectado "+UserName);
@@ -90,11 +99,17 @@ public class ConnectedUsersFrame extends JFrame{
         this.pack();
     }
     
+    /**
+     * Envía solicitud para agregar amigo
+     */
     public void AddFriend(){
         new FriendRequest(context, UserName);
         return;
     }
     
+    /**
+     * Envía solicitud para iniciar conversación
+     */
     public void StartConversation()
     {
         try {

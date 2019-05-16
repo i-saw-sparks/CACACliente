@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import petitions.FriendAccept;
 
 /**
- *
+ *Ventana para las notificaciones
  * @author usuario
  */
 public class RequestFrame extends JFrame{
@@ -30,6 +30,12 @@ public class RequestFrame extends JFrame{
     Context context;
     String id;
     
+    /**
+     * Constructor para notificaciones que no son de grupo
+     * @param name nombre del usuario
+     * @param type tipo de notificacion
+     * @param con contexto
+     */
     public RequestFrame(String name,String type, Context con){
         this.tipo=type;
         this.nombre=name;
@@ -38,6 +44,13 @@ public class RequestFrame extends JFrame{
         
     }
     
+    /**
+     * Constructori para notificaciones de grupo
+     * @param name nombre del grupo
+     * @param type tipo d enotificación
+     * @param con   contexto
+     * @param id  id del grupo
+     */
     public RequestFrame(String name, String type, Context con, String id)
     {
         this.tipo=type;
@@ -47,6 +60,9 @@ public class RequestFrame extends JFrame{
         Configuracion();
     }
     
+    /**
+     * Configuración inicial de la ventana de notificaciones
+     */
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle(SetLabel());
@@ -129,6 +145,10 @@ public class RequestFrame extends JFrame{
         this.pack();
     }
     
+    /**
+     * Selecciona el string del texto para la notificación
+     * @return String con la cadena ya concatenada
+     */
     public String SetLabel(){
         switch(tipo){
             case "friend":{
@@ -144,12 +164,17 @@ public class RequestFrame extends JFrame{
         return "Solicitud erronea de "+nombre;
     }
     
-    //Aceptados
+    /**
+     * Petición para aceptar amigo
+     */
     public void AcceptFriend(){
         new FriendAccept(context,nombre,true);
         return;
     }
     
+    /**
+     * Petición para aceptar grupo
+     */
     public void AcceptGroup()
     {        
         try {
@@ -177,12 +202,17 @@ public class RequestFrame extends JFrame{
     }
     
     
-    ////Rechazados
+    /**
+     * Petición para rechazar chat
+     */
     public void UnacceptFriend(){
         new FriendAccept(context,nombre,false);
         return;
     }
     
+    /**
+     * Petición para rechazar grupo
+     */
     public void UnacceptGroup(){
         try {
             JsonObject req = new JsonObject();

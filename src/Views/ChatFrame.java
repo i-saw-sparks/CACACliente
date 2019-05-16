@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Views;
 
 import com.google.gson.Gson;
@@ -24,7 +19,7 @@ import javax.swing.JTabbedPane;
 import requests.Refresh;
 
 /**
- *
+ *Ventana de panel del control del chat
  * @author ivan_
  */
 public class ChatFrame extends JFrame {    
@@ -44,7 +39,10 @@ public class ChatFrame extends JFrame {
     Hashtable<String, JButton> groupsList = new Hashtable<String, JButton>();
     Hashtable<String, JButton> friendsList = new Hashtable<String, JButton>();
     Hashtable<String, JButton> notificationsList = new Hashtable<String, JButton>();
-    
+    /**
+     * El constructor recive como parámetro el contexto
+     * @param source contexto utilizado en el cliente
+     */
     public ChatFrame(Context source) {
         this.context = source;
         configureWindow();
@@ -68,7 +66,12 @@ public class ChatFrame extends JFrame {
         notifications.revalidate();
         notifications.repaint();
     }
-    
+    /**
+     * Función para agregar una notificación en su panel, recibe el nombre, su tipo y id por ser para grupo
+     * @param name nombre del usuario remitente
+     * @param type  tipo de notifiación
+     * @param id    id de la notificación en caso de que sea para grupo
+     */
     public void addNotification(String name, String type, String id) {
         JButton label = new JButton("Solicitud de ingreso a " + name);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -81,6 +84,11 @@ public class ChatFrame extends JFrame {
         notifications.add(label);
     }
     
+    /**
+     *  Función para agregar un botón notificación en su panel, recibe el nombre y su tipo
+     * @param name Nombre del remitente de la notificación
+     * @param type  Tipo de la notificación
+     */
     public void addNotification(String name, String type) {
         JButton label = new JButton();
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -108,11 +116,22 @@ public class ChatFrame extends JFrame {
         notificationsList.put(name, label);
     }
     
-        private void optionsNotification(String name, String type, String id) {
+    /**
+     * Genera una venta de opciones de notificación (aceptar o rechazar) para un grupo
+     * @param name nombre del remitente
+     * @param type  tipo de notificación
+     * @param id    id del grupo 
+     */
+    private void optionsNotification(String name, String type, String id) {
         RequestFrame frame = new RequestFrame(name, type, context, id);
         frame.setVisible(true);
     }
     
+    /**
+     * Genera una ventana de opciones dependiendo de su tipo
+     * @param name nombre dle remitente
+     * @param type tipo de notificación
+     */
     private void optionsNotification(String name, String type) 
     {
         if (!type.equals("friend-unnacepted") && !type.equals("chat")) {
@@ -148,7 +167,11 @@ public class ChatFrame extends JFrame {
         }
     }
     
-    
+    /**
+     * Agrega un botón de amigo dentro de su barra correspondiente
+     * @param name nombre del amigo
+     * @param alias alias del amigo
+     */
     public void addFriend(String name, String alias) {
         JButton button = new JButton(alias);
         button.setSize(500, 100);
@@ -161,6 +184,11 @@ public class ChatFrame extends JFrame {
         friendsList.put(name, button);
     }
     
+    /**
+     *  Agrega un botón de grupo dentro de su barra correspondiente con los parámetros recibidos
+     * @param id    ide del grupo en cuestión
+     * @param asunto    Nombre del grupo
+     */
     public void addGroup(String id, String asunto) {
         JButton button = new JButton(asunto);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -174,11 +202,20 @@ public class ChatFrame extends JFrame {
         groupsList.put(id, button);
     }
     
+    /**
+     * Ventana de opciones del grupo
+     * @param id    ide del grupo en cuestión
+     * @param asunto    Nombre del grupo
+     */
     private void optionsGroup(String id, String asunto) {
         GroupFrame form = new GroupFrame(id, asunto, context);
         form.setVisible(true);
     }
     
+    /**
+     * Agrega un botón de usuario desconectado
+     * @param name nombre del usuario desconectado
+     */
     public void addDisconnected(String name) {
         JButton button = new JButton(name);
         button.setSize(500, 100);
@@ -190,12 +227,20 @@ public class ChatFrame extends JFrame {
         disconnected.add(button);
         disconnectedList.put(name, button);
     }
-    
+    /**
+     * Abre ventana de opciones para usuario desconectado
+     * @param name nombre del usuario desconectado
+     * @param button  botón que no sirve para nada :P
+     */
     private void optionsDisconnected(String name, JButton button) {
         DisconnectedUsersFrame form = new DisconnectedUsersFrame(name, context);
         form.setVisible(true);
     }
     
+    /**
+     * Agrega un botón de usuario conectado con su nombre
+     * @param name nombre del usuario conectado
+     */
     public void addConnected(String name) {
         JButton button = new JButton(name);
         button.setSize(500, 100);
@@ -208,6 +253,9 @@ public class ChatFrame extends JFrame {
         connectedList.put(name, button);
     }
     
+    /**
+     * Añade el botón para añadir grupo dentro de la opestaña de more o más(no recuerdo como aparece jeje)
+     */
     private void setAddGroupBtt() {
         JButton button = new JButton("Añadir nuevo grupo");
         button.addActionListener(e
@@ -218,21 +266,36 @@ public class ChatFrame extends JFrame {
         more.add(button);
     }
     
+    /**
+     * Abre ventana de opciones para usuario conectado
+     * @param name nombre del usuario conectado
+     * @param button otro botón que no sirve para nada :c
+     */
     private void optionsConnected(String name, JButton button) {
         ConnectedUsersFrame form = new ConnectedUsersFrame(name, context);
         form.setVisible(true);
     }
-    
+    /**
+     * Abre ventana de opciones para amigos
+     * @param name nombre del usuario amigo
+     * @param sender otro botón que no sirve para nada D:
+     */
     private void optionsFriends(String name, JButton sender) {
         Amigos_ventana form = new Amigos_ventana(name, context);
         form.setVisible(true);
     }
     
+    /**
+     * Recarga la ventana
+     */
     public void refresh() {
         this.revalidate();
         this.repaint();
     }
     
+    /**
+     * Configuración inicial de la ventana con sus paneles y toda la cosa (te luciste la dvd)
+     */
     private void configureWindow() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Panel de control CACA " + context.getUsername());

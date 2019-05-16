@@ -21,7 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- *
+ *Form para opciones de usuarios conectados que no son amigos
  * @author usuario
  */
 public class UnfriendChatFrame extends JFrame{
@@ -35,6 +35,11 @@ public class UnfriendChatFrame extends JFrame{
     private JButton enviar;
     Context context;
 
+    /**
+     * Constructor
+     * @param name
+     * @param con 
+     */
     public UnfriendChatFrame(String name,Context con){
         this.userName=name;
         this.context=con;
@@ -42,7 +47,9 @@ public class UnfriendChatFrame extends JFrame{
         this.setVisible(true);
     }
  
-
+/**
+ * Configuración inicial de la ventana
+ */
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Chat con "+userName);
@@ -112,6 +119,9 @@ public class UnfriendChatFrame extends JFrame{
         this.pack();
     }
  
+    /**
+     * Envía el mensaje por petición para ser almacenado en la base de datos
+     */
     public void EnviarMensaje(){
         try {
             JsonObject req = new JsonObject();
@@ -132,6 +142,11 @@ public class UnfriendChatFrame extends JFrame{
         }
     }
     
+    /**
+     * Agrega mensaje al text area concatenandolo a lo anterior
+     * @param origen nombre del remitente
+     * @param mensaje mensaje
+     */
     public void AgregarMensaje(String origen,String mensaje){
         mensajesArea.setText(mensajesArea.getText()+origen+ ": \n" +mensaje+ "\n");
     }

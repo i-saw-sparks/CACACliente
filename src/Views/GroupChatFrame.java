@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- *
+ *Abe ventana de chat para grupos
  * @author usuario
  */
 public class GroupChatFrame extends JFrame{
@@ -34,7 +34,12 @@ public class GroupChatFrame extends JFrame{
     private String id;
     Context context;
 
-    
+    /**
+     * Constructor
+     * @param id Id del grupo en cuestión
+     * @param name nombre del grupo
+     * @param con contexto de chatgroup
+     */
     public GroupChatFrame(String id,String name,Context con){
         this.groupName=name;
         this.context=con;
@@ -42,6 +47,9 @@ public class GroupChatFrame extends JFrame{
         Configuracion();
     }
     
+    /**
+     * Configuración inicial de la ventana
+     */
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Grupo "+groupName);
@@ -102,7 +110,9 @@ public class GroupChatFrame extends JFrame{
         this.setLayout(orden);
         this.pack();
     }
- 
+ /**
+  * Se envia la petición para guardar el mensaje en la base de datos
+  */
     public void EnviarMensaje()
     {
         try {
@@ -126,6 +136,11 @@ public class GroupChatFrame extends JFrame{
         }
     }
     
+    /**
+     * Agrega un mensaje en el text area de los mensajes
+     * @param origen
+     * @param mensaje 
+     */
     public void AgregarMensaje(String origen,String mensaje)
     {
         mensajesArea.setText(mensajesArea.getText()+origen+ ": \n" +mensaje+ "\n\n");

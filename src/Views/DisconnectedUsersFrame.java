@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import petitions.FriendRequest;
 
 /**
- *
+ *Form de opciones para usuarios desconectados
  * @author usuario
  */
 public class DisconnectedUsersFrame extends JFrame{
@@ -23,12 +23,20 @@ public class DisconnectedUsersFrame extends JFrame{
     private JLabel NombreUsuario;
     Context context;
     
+    /**
+     * Contructor
+     * @param name nombre del usuario desconectado
+     * @param con contexto de groupform
+     */
     public DisconnectedUsersFrame(String name,Context con){
         this.UserName=name;
         this.context=con;
         Configuracion();
     }
     
+    /**
+     * Configuración inicial de laventana con sus botones y listeners respectivos
+     */
     public void Configuracion(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Usuario "+UserName);
@@ -72,7 +80,9 @@ public class DisconnectedUsersFrame extends JFrame{
         this.setLayout(orden);
         this.pack();
     }
-    
+    /**
+     * Envía solicitud para agregar amigo
+     */
     public void AddFriend(){
         new FriendRequest(context, UserName);
         return;

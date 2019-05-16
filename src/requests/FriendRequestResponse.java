@@ -9,7 +9,7 @@ import controllers.Context;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *Procesa la petición para enviar una petición de amistad
  * @author ivan_
  */
 public class FriendRequestResponse {
