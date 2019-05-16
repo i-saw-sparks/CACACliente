@@ -143,7 +143,8 @@ public class GroupFrame extends JFrame{
     }
     
     public void OpenChat(){
-
+        GroupChatFrame form=new GroupChatFrame(id,username,context); 
+        form.setVisible(true);
         return;
     }
     

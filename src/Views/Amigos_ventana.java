@@ -43,7 +43,8 @@ public class Amigos_ventana extends JFrame {
        
     
     void bChat() {
-
+        FriendChatFrame form=new FriendChatFrame(UserName,context);
+        form.setVisible(true);
         return;
     }
 
