@@ -7,8 +7,10 @@ package controllers;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import petitions.AcceptPrivate;
 import petitions.NewGroupMessage;
 import petitions.NewMessage;
+import petitions.NewPrivateRequest;
 import requests.ChargeConversation;
 import requests.ChargeGroupConversation;
 import requests.FriendRequestResponse;
@@ -29,12 +31,12 @@ public class ProcessRequest {
 
     public static void processRequest(String request, Context context) {
         JsonObject response;
+        System.out.println(request);
         try {
             response = parser.parse(request).getAsJsonObject();
         } catch (IllegalStateException ex) {
             return;
         }
-
         Sign sign;
         Login login;
         switch (response.get("type").getAsString()) {
@@ -51,6 +53,9 @@ public class ProcessRequest {
             case "refresh":
                 login = new Login(context,response.get("args").getAsJsonObject());
                 break; 
+            case "ok":
+                sign = new Sign(response.get("status").getAsBoolean());
+                break;
             case "exit":
             case "newGroup":
             case "modifyGroup":
@@ -74,8 +79,15 @@ public class ProcessRequest {
             case "newGroupMssg":
                 new NewGroupMessage(response.get("args").getAsJsonObject(),context);
                 break;
+            case "new-private":
+                new NewPrivateRequest(response.get("args").getAsJsonObject(),context);
+                break;
+            case  "accept-private":
+                new AcceptPrivate(response.get("args").getAsJsonObject(),context);
+                break;
             default:
                 System.out.println("No coincide");
+                System.out.println(request);
         }
     }
 }

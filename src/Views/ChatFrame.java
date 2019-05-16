@@ -5,8 +5,11 @@
  */
 package Views;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import controllers.Context;
 import java.awt.Component;
+import java.io.IOException;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -113,6 +117,33 @@ public class ChatFrame extends JFrame {
         if (!type.equals("friend-unnacepted")) {
             RequestFrame form = new RequestFrame(name, type, context);
             form.setVisible(true);
+        }
+        if(type.equals("chat"))
+        {
+            int input = JOptionPane.showConfirmDialog(null, "¿Quiere abir el chat privado?","Chat RAM",
+				JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if(input == 0)
+            {
+                 try {
+                 JsonObject req = new JsonObject();
+                 req.addProperty("type", "accept-private");
+                 JsonObject args = new JsonObject();
+                 
+                args.addProperty("request", context.getUsername());
+                args.addProperty("requester", name);
+                
+                UnfriendChatFrame fr = new UnfriendChatFrame(name,context);
+                
+                context.getuChats().put(name,fr);
+                
+                req.add("args", args);
+                
+                context.getConnection().getOutputStream().write(new Gson().toJson(req).getBytes());
+             } catch (IOException ex) 
+             {
+                 Logger.getLogger(GroupFrame.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }
         }
     }
     
